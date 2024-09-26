@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech and Text Conversion Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Voice and Text Conversion Tool</h1>
+    </header>
+
+    <main class="container">
+        <!-- Recording section with blinking indicator -->
+        <section class="audio-section">
+            <h2>Record Your Audio</h2>
+            <div class="recording-controls">
+                <button id="start-recording-btn">Start Recording</button>
+                <button id="stop-recording-btn" disabled>Stop Recording</button>
+            </div>
+            <p id="status-message" style="display: none;">Not recording...</p>
+
+            <!-- Recording indicator -->
+            <div id="recording-indicator" class="recording-indicator" style="display: none;">
+                <span class="blink-circle"></span> Recording...
+            </div>
+
+            <h3>Transcription Output</h3>
+            <textarea id="transcription-output" readonly></textarea>
+        </section>
+
+
+        <section class="upload-section">
+            <h2>Upload Audio File</h2>
+            <div class="upload-controls">
+                <input type="file" id="audio-file-upload" accept="audio/*">
+                <button id="upload-audio-btn">Upload Audio</button>
+            </div>
+            <h3>Transcript of Uploaded Audio</h3>
+            <textarea id="uploaded-transcription-output" readonly></textarea>
+        </section>
+
+        <section class="tts-section">
+            <h2>Convert Text to Speech</h2>
+            <textarea id="text-to-speak" placeholder="Enter text here..."></textarea>
+            <button id="convert-text-btn">Convert to Speech</button>
+        </section>
+
+        <section class="saved-recordings">
+            <h2>Saved Recordings</h2>
+            <ul id="recordings-list">
+                {% for recording in recordings %}
+                <li><a href="/recordings/{{ recording }}">{{ recording }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="saved-transcripts">
+            <h2>Saved Transcripts</h2>
+            <ul id="transcripts-list">
+                {% for transcript in transcripts %}
+                <li><a href="/transcripts/{{ transcript }}">{{ transcript }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Speech and Text Conversion Tool</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
